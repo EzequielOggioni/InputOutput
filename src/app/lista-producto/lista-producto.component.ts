@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductoService } from '../helper/producto.service';
 import { Producto } from '../producto';
 
 @Component({
@@ -8,25 +9,23 @@ import { Producto } from '../producto';
 })
 export class ListaProductoComponent implements OnInit {
   nuevoProducto: Producto;
-  public lista: Array<Producto>;
   public nuevo: boolean
-  constructor() {
-    this.nuevo = false;
-    this.lista = new Array<Producto>();
-    this.lista.push({ imagen: 'https://happylearning.tv/wp-content/uploads/2017/11/portada_seccion_juegos-01.png', titulo: 'Juegos Varios' });
-    this.lista.push({ imagen: 'https://acf.geeknetic.es/imgw/imagenes/auto/2020/9/30/ame-los-mejores-juegos-gratis-para-iphone.jpg', titulo: 'Buscar monedas' });
-    this.nuevoProducto = new Producto();
+  public lista: Array<Producto>;
 
+  constructor(miSrv: ProductoService ) {
+    this.nuevo = false;
+    this.nuevoProducto = new Producto();
+    this.lista =  miSrv.lista;
   }
-  borrar(p: Producto) {
-    this.lista = this.lista.filter(t => t.titulo != p.titulo);
+  borrar(p:number) {
+    
+     this.lista.splice(p,1);
 
   }
 
   nuevoProd() {
     this.nuevo = true;
     this.nuevoProducto = new Producto();
-    this.lista.push(this.nuevoProducto);
 
   }
 

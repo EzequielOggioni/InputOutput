@@ -6,10 +6,10 @@
 </div>
 <div class="row">
 
-    <div class="col-4" *ngFor="let prod of lista" > 
+    <div class="col-4" *ngFor="let prod of lista;let i=index" > 
         <div >
     
-            <app-producto [productoEntrada]="prod"  (eliminarProducto)="borrar($event)"></app-producto>
+            <app-producto [productoEntrada]="prod"  (eliminarProducto)="borrar(i)"></app-producto>
         </div>
          </div>
 </div>

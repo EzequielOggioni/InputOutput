@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProductoService } from '../helper/producto.service';
 import { Producto } from '../producto';
 
 @Component({
@@ -13,11 +14,12 @@ export class NuevoProductoComponent implements OnInit {
 
   @Input()
   public prod:Producto;
-  constructor() {
+  constructor(public prSer:ProductoService ) {
     this.prod = new Producto();
    }
 
    Aceptar(){
+    this.prSer.lista.push(this.prod);
     this.aceptarNuevo.emit();
    }
   ngOnInit(): void {
